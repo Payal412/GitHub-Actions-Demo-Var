@@ -4,7 +4,7 @@ on:
   workflow_dispatch
 
   env:
-     cloud: google-cloud
+     Cloud: google-cloud
 
   jobs:
     greeting_job:
