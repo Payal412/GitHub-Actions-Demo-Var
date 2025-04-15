@@ -1,26 +1,19 @@
 name: Test User Input workflow
 
-#control when the action will run. workflow runs when manually triggered using the UI  or API.
+# Control when the action will run. Workflow runs when manually triggered using the UI or API.
 on: 
   workflow_dispatch:
-    #Inputs the workflow accepts.
     inputs:
       number1:
-        #Friendly description to be  shown in the  UI instead of 'number1'.
         description: 'First number'
-        #default value if no value is explicitly provided.
         default: '0'
-        #Input has to be provided for the workflow to run.
         required: true
-        #The data type of the input
+        type: string
       number2:  
-        #Friendly description to be  shown in the  UI instead of 'number1'.
         description: 'Second number'
-        #default value if no value is explicitly provided.
         default: '0'
-        #Input has to be provided for the workflow to run.
         required: true
-        #The data type of the input
+        type: string
 
 jobs: 
   add_numbers:
@@ -28,7 +21,9 @@ jobs:
     steps: 
       - name: Add numbers
         id: sum
-        run: echo "::set-output name=sum::$((${{inputs.number1}} + ${{inputs.number2}}))"
+        run: |
+          sum=$(( ${{ inputs.number1 }} + ${{ inputs.number2 }} ))
+          echo "sum=$sum" >> $GITHUB_OUTPUT
 
       - name: Display sum 
-        run: echo "The sum of $((${{inputs.number1}} and ${{inputs.number2}})) is ${{steps.sum.outputs.sum}}"
+        run: echo "The sum of ${{ inputs.number1 }} and ${{ inputs.number2 }} is ${{ steps.sum.outputs.sum }}"
