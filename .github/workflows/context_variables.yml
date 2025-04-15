@@ -1,7 +1,7 @@
 name: Testing Context Variables
 
 on: 
-  workflow-dispatch
+  workflow_dispatch
 
 env: 
   Cloud: google-cloud
